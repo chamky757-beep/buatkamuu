@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ucapan Ulang Tahun Spesial 🎉</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: linear-gradient(135deg, #ffe0f0 0%, #ffcce6 50%, #ffb3d9 100%);
+    font-family: 'Georgia', serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+      radial-gradient(circle, rgba(255,255,0.9) 1.5px, transparent 1.5px),
+      radial-gradient(circle, rgba(255,182,219,0.7) 1px, transparent 1px);
+    background-size: 60px 60px, 90px 90px;
+    animation: sparkle 4s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+  }
+  @keyframes sparkle {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-60px); }
+  }
+.container { text-align: center; position: relative; width: 100%; max-width: 500px; z-index: 10; }
+.step { display: none; animation: fadeIn 0.6s ease; }
+.step.active { display: block; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+.card {
+    background: linear-gradient(to bottom, #fffafc, #fff5fb);
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(184, 50, 128, 0.35);
+    padding: 35px 25px;
+    border: 3px solid rgba(255,182,219,0.4);
+  }
+.card h1 { color: #b83280; font-size: 26px; margin-bottom: 20px; text-shadow: 0 2px 6px rgba(184, 50, 128, 0.25); }
+.input-group { margin: 20px 0; }
+.input-group label { display: block; color: #b83280; font-weight: 600; margin-bottom: 8px; font-size: 15px; }
+.input-group input[type="text"],.input-group input[type="number"],.input-group textarea {
+    width: 100%;
+    max-width: 280px;
+    padding: 13px 15px;
+    font-size: 16px;
+    text-align: center;
+    border: 3px solid #ff8fb1;
+    border-radius: 15px;
+    font-family: 'Georgia', serif;
+    font-weight: 600;
+    color: #b83280;
+    outline: none;
+    transition: all 0.3s;
+    resize: none;
+  }
+.input-group textarea {
+    text-align: left;
+    min-height: 120px;
+    max-width: 100%;
+    line-height: 1.6;
+  }
+.input-group input:focus,.input-group textarea:focus {
+    border-color: #d982b5;
+    box-shadow: 0 0 20px rgba(217, 130, 181, 0.5);
+    transform: scale(1.03);
+  }
+.photo-preview {
+    width: 120px;
+    height: 120px;
+    margin: 15px auto;
+    border-radius: 50%;
+    border: 4px solid #ff8fb1;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ffe4f1, #ffd6eb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    box-shadow: 0 8px 20px rgba(217, 130, 181, 0.4);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+.photo-preview:hover { transform: scale(1.08) rotate(5deg); }
+.photo-preview img { width: 100%; height: 100%; object-fit: cover; }
+.btn {
+    padding: 14px 35px;
+    background: linear-gradient(135deg, #ff8fb1, #d982b5, #c76da2, #ff6b9d);
+    background-size: 300% 300%;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: 'Georgia', serif;
+    box-shadow: 0 6px 18px rgba(217, 130, 181, 0.5);
+    font-weight: 700;
+    animation: btn-gradient 3s ease infinite;
+    margin: 10px 5px;
+  }
+.btn-wa {
+    background: linear-gradient(135deg, #25D366, #128C7E, #075E54);
+    animation: btn-gradient 3s ease infinite;
+  }
+  @keyframes btn-gradient {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+.btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 10px 25px rgba(217, 130, 181, 0.7); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; animation: none; }
+
+  /* KADO */
+.gift-box { position: relative; width: 220px; height: 220px; margin: 30px auto; cursor: pointer; transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); filter: drop-shadow(0 20px 40px rgba(184, 50, 128, 0.4)); }
+.gift-box:hover { transform: scale(1.08) translateY(-10px) rotate(-2deg); }
+.gift-box.open { pointer-events: none; animation: boxDisappear 0.8s ease 1.2s forwards; }
+  @keyframes boxDisappear { to { opacity: 0; transform: scale(0.8) translateY(-50px); } }
+.box-body { position: absolute; width: 100%; height: 100%; background: linear-gradient(135deg, #ff8fb1 0%, #d982b5 50%, #c76da2 100%); border-radius: 10px; box-shadow: inset 0 -10px 20px rgba(0,0,0,0.2); transition: opacity 0.5s ease 1s; }
+.gift-box.open.box-body { opacity: 0; }
+.box-lid { position: absolute; width: 110%; height: 50px; background: linear-gradient(135deg, #ff6b9d 0%, #ff8fb1 50%, #d982b5 100%); border-radius: 10px 10px 5px; top: -25px; left: -5%; transform-origin: bottom center; transition: transform 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55); box-shadow: 0 10px 25px rgba(0,0,0,0.3); z-index: 2; }
+.gift-box.open.box-lid { transform: rotateX(-180deg) translateY(-30px); }
+.box-ribbon-v { position: absolute; width: 35px; height: 100%; background: linear-gradient(to right, #ffd700, #ffed4e, #ffd700); left: 50%; transform: translateX(-50%); box-shadow: 0 0 15px rgba(255,215,0,0.6); z-index: 1; transition: opacity 0.5s ease 1s; }
+.gift-box.open.box-ribbon-v { opacity: 0; }
+.box-ribbon-h { position: absolute; width: 100%; height: 35px; background: linear-gradient(to bottom, #ffd700, #ffed4e, #ffd700); top: 50%; transform: translateY(-50%); box-shadow: 0 0 15px rgba(255,215,0,0.6); z-index: 1; transition: opacity 0.5s ease 1s; }
+.gift-box.open.box-ribbon-h { opacity: 0; }
+.box-bow { position: absolute; top: -40px; left: 50%; transform: translateX(-50%); font-size: 45px; z-index: 3; transition: all 0.5s ease 0.3s; animation: bow-bounce 2s ease-in-out infinite; }
+  @keyframes bow-bounce { 0%, 100% { transform: translateX(-50%) scale(1); } 50% { transform: translateX(-50%) scale(1.1); } }
+.gift-box.open.box-bow { opacity: 0; transform: translateX(-50%) scale(0) translateY(-30px); }
+
+  /* SURAT */
+.letter { background: linear-gradient(to bottom, #fffafc, #fff5fb); background-image: repeating-linear-gradient(#fffafc, #fffafc 27px, #ffd6eb 28px); border-radius: 12px; box-shadow: 0 20px 50px rgba(184, 50, 128, 0.35); padding: 30px 25px; border: 3px solid rgba(255,182,219,0.4); position: relative; text-align: left; }
+.letter::before { content: '💕'; position: absolute; top: 12px; right: 18px; font-size: 24px; opacity: 0.6; }
+.letter h2 { color: #b83280; font-size: 26px; margin-bottom: 18px; text-align: center; font-weight: 700; text-shadow: 0 2px 6px rgba(184, 50, 128, 0.25); }
+.letter p { color: #6b4c5f; line-height: 1.95; font-size: 15px; text-align: center; margin-bottom: 15px; }
+.letter-photo { width: 100px; height: 100px; margin: 0 auto 15px; border-radius: 50%; border: 3px solid #ff8fb1; overflow: hidden; box-shadow: 0 5px 15px rgba(217, 130, 181, 0.4); }
+.letter-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* 6 FOTO */
+.photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 25px 0; }
+.photo-slot { width: 100%; aspect-ratio: 1; background: linear-gradient(135deg, #ffe4f1, #ffd6eb); border: 3px solid #ff8fb1; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(217, 130, 181, 0.3); transition: all 0.3s; }
+.photo-slot:hover { transform: scale(1.08) rotate(3deg); border-color: #d982b5; box-shadow: 0 8px 20px rgba(217, 130, 181, 0.5); }
+.photo-slot img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* KUE + TEROMPET + BALON */
+.cake-area { position: relative; padding: 30px 0 50px; }
+.cake-container { background: linear-gradient(135deg, #fff5fb, #ffe4f1); border-radius: 20px; padding: 25px; box-shadow: 0 15px 40px rgba(184, 50, 128, 0.3); border: 3px solid rgba(255,182,219,0.5); position: relative; z-index: 5; }
+.cake { position: relative; width: 180px; height: 140px; margin: 0 auto 20px; }
+.cake-layer { position: absolute; left: 50%; transform: translateX(-50%); border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+.cake-layer-1 { width: 160px; height: 50px; background: linear-gradient(to bottom, #8b4513, #6b3410); bottom: 0; }
+.cake-layer-2 { width: 130px; height: 45px; background: linear-gradient(to bottom, #ff8fb1, #d982b5); bottom: 45px; }
+.cake-layer-3 { width: 100px; height: 40px; background: linear-gradient(to bottom, #fff, #ffe4f1); bottom: 85px; }
+.cake-cream { position: absolute; width: 110px; height: 15px; background: #fff; border-radius: 50%; left: 50%; transform: translateX(-50%); bottom: 120px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+.candle { position: absolute; width: 8px; height: 35px; background: linear-gradient(to bottom, #ff6b9d, #ff8fb1); left: 50%; transform: translateX(-50%); bottom: 130px; border-radius: 4px 4px 0 0; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+.flame { position: absolute; width: 16px; height: 22px; background: radial-gradient(ellipse at center, #ffed4e 0%, #ff9f43 40%, #ff6b6b 100%); border-radius: 50% 50% / 60% 60% 40%; left: 50%; transform: translateX(-50%); bottom: 165px; opacity: 1; transition: opacity 0.5s, transform 0.5s; animation: flicker 0.15s infinite alternate; box-shadow: 0 0 20px rgba(255,159,67,0.8), 0 0 40px rgba(255,237,78,0.6); }
+  @keyframes flicker { 0% { transform: translateX(-50%) scale(1) rotate(-2deg); } 100% { transform: translateX(-50%) scale(1.1) rotate(2deg); } }
+.flame.off { opacity: 0; transform: translateX(-50%) scale(0); animation: none; }
+.horn { position: absolute; font-size: 48px; opacity: 0; transform: scale(0); filter: drop-shadow(0 6px 12px rgba(184, 50, 128, 0.3)); z-index: 3; }
+.horn.show { animation: horn-appear 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards; }
+  @keyframes horn-appear { to { opacity: 1; transform: scale(1) rotate(var(--rotation)); } }
+.horn-1 { top: -60px; left: -50px; --rotation: 35deg; }
+.horn-2 { top: -75px; right: -45px; --rotation: -35deg; }
+.horn-3 { top: 40px; left: -65px; --rotation: 55deg; }
+.horn-4 { top: 50px; right: -60px; --rotation: -55deg; }
+.horn-5 { bottom: -50px; left: -50px; --rotation: 25deg; }
+.horn-6 { bottom: -60px; right: -55px; --rotation: -25deg; }
+.balloon { position: absolute; width: 45px; height: 55px; border-radius: 50% 50% / 60% 60% 40%; box-shadow: inset -5px -5px 10px rgba(0,0,0,0.12), 0 6px 18px rgba(0,0,0,0.25); opacity: 0; z-index: 2; }
+.balloon.show { animation: balloon-rise 6s ease-in forwards; }
+  @keyframes balloon-rise {
+    0% { opacity: 1; transform: translateY(300px) translateX(0) scale(0.5); }
+    100% { opacity: 0; transform: translateY(-400px) translateX(var(--drift)) scale(1); }
+  }
+.balloon::after { content: ''; position: absolute; width: 2px; height: 70px; background: linear-gradient(to bottom, rgba(0,0,0,0.2), transparent); top: 100%; left: 50%; }
+.balloon-1 { background: radial-gradient(circle at 30% 30%, #ffb3d9, #ff6b9d); left: 10%; animation-delay: 0.2s; --drift: -20px; }
+.balloon-2 { background: radial-gradient(circle at 30% 30%, #fff0a3, #feca57); left: 25%; animation-delay: 0.5s; --drift: 15px; }
+.balloon-3 { background: radial-gradient(circle at 30% 30%, #a8e6ff, #48dbfb); left: 45%; animation-delay: 0.8s; --drift: -10px; }
+.balloon-4 { background: radial-gradient(circle at 30% 30%, #e0c3ff, #a78bfa); left: 65%; animation-delay: 1.1s; --drift: 20px; }
+.balloon-5 { background: radial-gradient(circle at 30% 30%, #ffc8dd, #ffafcc); left: 80%; animation-delay: 1.4s; --drift: -15px; }
+.age-balloon { position: absolute; font-size: 80px; font-weight: 900; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700, #ff8fb1, #ffd700); background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(5px 5px 10px rgba(184, 50, 128, 0.5)); opacity: 0; font-family: 'Arial Black', sans-serif; z-index: 4; }
+.age-balloon.show { animation: age-appear 1.5s ease-out forwards, shine 4s linear infinite 1.5s; }
+  @keyframes age-appear { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0); } 60% { transform: translate(-50%, -50%) scale(1.2); } 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+  @keyframes shine { 0% { background-position: 0% 50%; } 100% { background-position: 300% 50%; } }
+.wish-text { margin-top: 15px; color: #b83280; font-size: 15px; font-weight: 600; opacity: 0; transition: opacity 0.5s; }
+.wish-text.show { opacity: 1; }
+
+  @media (max-width: 500px) {
+.photos { grid-template-columns: repeat(2, 1fr); }
+.age-balloon { font-size: 65px; }
+.horn { font-size: 40px; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- STEP 1: INPUT NAMA, UMUR, FOTO -->
+    <div class="step active" id="step1">
+      <div class="card">
+        <h1>Isi dulu yaaaaa🎂✨</h1>
+        
+        <div class="input-group">
+          <label>Upload Foto</label>
+          <div class="photo-preview" id="photoPreview" onclick="uploadPhoto()">
+            📷
+          </div>
+          <input type="file" id="photoInput" accept="image/*" style="display:none;">
+        </div>
+
+        <div class="input-group">
+          <label>Nama Lengkap</label>
+          <input type="text" id="nameInput" placeholder="Cantik" maxlength="20">
+        </div>
+
+        <div class="input-group">
+          <label>Ulang Tahun Ke-</label>
+          <input type="number" id="ageInput" min="1" max="100" placeholder="17">
+        </div>
+
+        <button class="btn" onclick="startGift()">Lanjut ➜</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: KADO -->
+    <div class="step" id="step2">
+      <div class="card">
+        <h1>Ada Hadiah Spesial Buat <span id="nameDisplay">Kamu</span>! 🎁💝</h1>
+        <p style="color:#6b4c5f; margin-bottom:20px;">Klik kado di bawah buat buka surat</p>
+        <div class="gift-box" id="giftBox">
+          <div class="box-body"></div>
+          <div class="box-ribbon-v"></div>
+          <div class="box-ribbon-h"></div>
+          <div class="box-lid"></div>
+          <div class="box-bow">🎀</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3: SURAT -->
+    <div class="step" id="step3">
+      <div class="letter">
+        <div class="letter-photo" id="letterPhoto"></div>
+        <h2 id="letterTitle">Happy Sweet 17th! ✨</h2>
+        <p id="letterText">
+          Kamu tau nggak? Hari ini semesta lagi ulang tahun. Karena 17 tahun lalu, dia ngelahirin kamu ke dunia. Kamu itu seperti hadiah yang dibungkus paling cantik. Isinya? Kebahagiaan buat semua orang yang kenal kamu.
+        </p>
+        <p>
+          Kamu itu seperti kue ulang tahun. Manis, bikin nagih, dan semua orang rebutan pengen potongan pertamanya. Tapi aku yang paling beruntung, karena aku dapet kamu seutuhnya. Semoga di umur ini, semua mimpi kamu jadi kenyataan ya! 💖
+        </p>
+      </div>
+      <button class="btn" onclick="nextStep(4)">Lanjut</button>
+    </div>
+
+    <!-- STEP 4: 6 FOTO -->
+    <div class="step" id="step4">
+      <div class="card">
+        <h1>ada cewe cakep nihhh <span id="nameDisplay2">Kamu</span> ✨</h1>
+        <div class="photos">
+          <div class="photo-slot"><img src="https://images.unsplash.com/photo-1517849845537-4d257902454a?w=200&h=200&fit=crop" alt="Foto 1"></div>
+          <div class="photo-slot"><img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=200&h=200&fit=crop" alt="Foto 2"></div>
+          <div class="photo-slot"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&h=200&fit=crop" alt="Foto 3"></div>
+          <div class="photo-slot"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop" alt="Foto 4"></div>
+          <div class="photo-slot"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop" alt="Foto 5"></div>
+          <div class="photo-slot"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop" alt="Foto 6"></div>
+        </div>
+        <p style="color:#6b4c5f; font-size:14px; margin-bottom:15px;">cakep banget neng😖</p>
+        <button class="btn" onclick="nextStep(5)">Lanjut</button>
+      </div>
+    </div>
+
+    <!-- STEP 5: KUE + LILIN + TEROMPET + BALON -->
+    <div class="step" id="step5">
+      <div class="cake-area">
+        <div class="cake-container">
+          <div class="cake">
+            <div class="horn horn-1">🎉</div>
+            <div class="horn horn-2">🎉</div>
+            <div class="horn horn-3">🎉</div>
+            <div class="horn horn-4">🎉</div>
+            <div class="horn horn-5">🎉</div>
+            <div class="horn horn-6">🎉</div>
+            <div class="age-balloon" id="ageBalloon">17</div>
+            <div class="cake-layer cake-layer-1"></div>
+            <div class="cake-layer cake-layer-2"></div>
+            <div class="cake-layer cake-layer-3"></div>
+            <div class="cake-cream"></div>
+            <div class="candle"></div>
+            <div class="flame" id="flame"></div>
+          </div>
+          <button class="btn" id="blowBtn" onclick="blowCandle()">💨 Tiup Lilinnya!</button>
+          <p class="wish-text" id="wishText">Make a wish, <span id="nameDisplay3">Cantik</span>! ✨<br>Semoga semua doamu terkabul ya!</p>
+          <button class="btn" id="thanksBtn" onclick="nextStep(6)" style="display:none; margin-top:15px;">Tulis Ucapan Terimakasih 💌</button>
+        </div>
+        <div class="balloon balloon-1"></div>
+        <div class="balloon balloon-2"></div>
+        <div class="balloon balloon-3"></div>
+        <div class="balloon balloon-4"></div>
+        <div class="balloon balloon-5"></div>
+      </div>
+    </div>
+
+    <!-- STEP 6: SURAT TERIMAKASIH + KIRIM WA -->
+    <div class="step" id="step6">
+      <div class="card">
+        <h1>Tulis Terimakasih Kamu 💖</h1>
+        <p style="color:#6b4c5f; margin-bottom:15px; font-size:14px;">Kirim balasan manis buat yang udah kasih kejutan ini</p>
+        <div class="input-group">
+          <textarea id="thanksMessage" placeholder="Makasih ya udah bikin kejutan ini... Aku seneng banget! 🥺💕"></textarea>
+        </div>
+        <button class="btn btn-wa" onclick="sendToWA()"> Kirim terimakasih</button>
+        <button class="btn" onclick="nextStep(1)" style="background: linear-gradient(135deg, #a8a8a8, #7a7a);">🔄 Buat Lagi</button>
+      </div>
+    </div>
+
+  </div>
+
+<script>
+  let userName = 'Cantik';
+  let userAge = 17;
+  let userPhoto = '';
+  const WA_NUMBER = '6288215694558'; // nomor tujuan tanpa +
+
+  function uploadPhoto() {
+    document.getElementById('photoInput').click();
+  }
+
+  document.getElementById('photoInput').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        userPhoto = event.target.result;
+        document.getElementById('photoPreview').innerHTML = `<img src="${userPhoto}" alt="Foto">`;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  function startGift() {
+    const name = document.getElementById('nameInput').value.trim();
+    const age = document.getElementById('ageInput').value;
+    
+    if (!name) {
+      alert('Isi nama dulu ya! 😊');
+      return;
+    }
+    if (!age || age < 1) {
+      alert('Masukin umur yang bener ya! 😊');
+      return;
+    }
+    if (!userPhoto) {
+      alert('Upload foto dulu ya! 📷');
+      return;
+    }
+    
+    userName = name;
+    userAge = parseInt(age);
+    
+    // Update semua display nama
+    document.getElementById('nameDisplay').textContent = userName;
+    document.getElementById('nameDisplay2').textContent = userName;
+    document.getElementById('nameDisplay3').textContent = userName;
+    
+    nextStep(2);
+  }
+
+  function nextStep(step) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById('step' + step).classList.add('active');
+    
+    if (step === 3) {
+      // Update surat
+      document.getElementById('letterTitle').textContent = `Happy Sweet ${userAge}th, ${userName}! ✨`;
+      document.getElementById('letterText').innerHTML = `
+        Kamu tau nggak? Hari ini semesta lagi ulang tahun. Karena ${userAge} tahun lalu, dia ngelahirin ${userName} ke dunia. Kamu itu seperti hadiah yang dibungkus paling cantik. Isinya? Kebahagiaan buat semua orang yang kenal kamu.
+      `;
+      // Masukkan foto ke surat
+      document.getElementById('letterPhoto').innerHTML = `<img src="${userPhoto}" alt="${userName}">`;
+    }
+    
+    if (step === 5) {
+      // Update balon angka usia
+      document.getElementById('ageBalloon').textContent = userAge;
+    }
+  }
+
+  // Klik kado
+  document.getElementById('giftBox').addEventListener('click', () => {
+    document.getElementById('giftBox').classList.add('open');
+    setTimeout(() => {
+      nextStep(3);
+    }, 1800);
+  });
+
+  function blowCandle() {
+    const flame = document.getElementById('flame');
+    const blowBtn = document.getElementById('blowBtn');
+    const wishText = document.getElementById('wishText');
+    const thanksBtn = document.getElementById('thanksBtn');
+    const horns = document.querySelectorAll('.horn');
+    const balloons = document.querySelectorAll('.balloon');
+    const ageBalloon = document.getElementById('ageBalloon');
+
+    flame.classList.add('off');
+    blowBtn.disabled = true;
+    blowBtn.textContent = '🎂 Lilin Mati!';
+
+    // Munculin terompet
+    setTimeout(() => {
+      horns.forEach((horn, i) => {
+        setTimeout(() => horn.classList.add('show'), i * 150);
+      });
+    }, 300);
+
+    // Munculin balon terbang
+    setTimeout(() => {
+      balloons.forEach(balloon => balloon.classList.add('show'));
+    }, 800);
+
+    // Munculin balon angka usia
+    setTimeout(() => {
+      ageBalloon.classList.add('show');
+    }, 1200);
+
+    setTimeout(() => {
+      wishText.classList.add('show');
+    }, 1800);
+
+    // Munculin tombol terimakasih
+    setTimeout(() => {
+      thanksBtn.style.display = 'inline-block';
+    }, 2500);
+  }
+
+  function sendToWA() {
+    const message = document.getElementById('thanksMessage').value.trim();
+    if (!message) {
+      alert('Tulis pesan terimakasih dulu ya! 💌');
+      return;
+    }
+    
+    const waText = `Hai! ${userName} di sini 💖%0A%0A${encodeURIComponent(message)}%0A%0A_Makasih udah bikin kejutan ulang tahun yang ke-${userAge}! 🎂🎉_`;
+    
+    // Buka WA ke nomor tujuan
+    window.open(`https://wa.me/${WA_NUMBER}?text=${waText}`, '_blank');
+  }
+</script>
+</body>
+</html>
